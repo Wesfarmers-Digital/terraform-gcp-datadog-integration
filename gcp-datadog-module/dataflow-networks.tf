@@ -14,12 +14,14 @@
 
 # Fetch VPC/Subnet network details
 data "google_compute_network" "vpc" {
-  name = var.vpc_name
+  name       = var.vpc_name
+  depends_on = [time_sleep.wait_for_apis]
 }
 
 data "google_compute_subnetwork" "dataflow_subnetwork" {
-  name   = var.subnet_name
-  region = var.subnet_region
+  name       = var.subnet_name
+  region     = var.subnet_region
+  depends_on = [time_sleep.wait_for_apis]
 }
 
 ###################################################################################################
@@ -32,6 +34,7 @@ resource "google_compute_region_network_firewall_policy" "allow_datadog_policy" 
   description = "Firewall policy to allow traffic from Dataflow Workers to Datadog"
   project     = var.project_id
   region      = var.subnet_region
+  depends_on  = [time_sleep.wait_for_apis]
 }
 
 # Create the Firewall rule for the policy

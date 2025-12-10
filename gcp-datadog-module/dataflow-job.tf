@@ -36,5 +36,5 @@ resource "google_dataflow_job" "pubsub_stream_to_datadog" {
   }
   on_delete = "cancel"
   labels    = { dataflow-job-label = "datadog_terraform" }
-  depends_on = [google_project_service.enable_apis, time_sleep.dataflow_sa_creation]
+  depends_on = [time_sleep.wait_for_apis]
 }

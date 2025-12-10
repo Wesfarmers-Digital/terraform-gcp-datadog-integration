@@ -26,9 +26,10 @@ These deployment scripts are provided 'as is', without warranty. See [Copyright 
 
 ## Prerequisites
 
+* Enable the `serviceusage.googleapis.com`, `cloudresourcemanager.googleapis.com` & `pubsub.googleapis.com` APIs from the beginning to avoid any kind of errors. 
 * Download `gcloud` CLI.
 * Download `terraform` CLI.
-* Ensure user's IAM policies have `secretmanager.versions.access` enabled.
+* Ensure user's IAM policies have `secretmanager.versions.access` permissions applied.
 * Perform `gcloud auth login` before performing terraform commands.
 * A Virtual Private Cloud (VPC) - Required in the '**`vpc_name`**' input variable.
 * A network subnet attached to the VPC with [Private Google Access](https://cloud.google.com/vpc/docs/private-google-access) enabled (Resources will be created in the subnet's region) -  Required in the '**`subnet_name`**' input variable.

@@ -22,14 +22,15 @@ resource "google_project_service" "enable_apis" {
     "dataflow.googleapis.com",
     "logging.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "iam.googleapis.com"
+    "iam.googleapis.com",
+    "serviceusage.googleapis.com"
   ])
 
   service = each.key
 }
 
-# Wait for Dataflow 'producer' SA to be created.
-resource "time_sleep" "dataflow_sa_creation" {
-  depends_on = [google_project_service.enable_apis]
-  create_duration = "55s"
+# Wait for APIs to be fully enabled and Dataflow 'producer' SA to be created.
+resource "time_sleep" "wait_for_apis" {
+  depends_on      = [google_project_service.enable_apis]
+  create_duration = "60s"
 }

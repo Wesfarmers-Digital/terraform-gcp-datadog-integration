@@ -28,7 +28,7 @@ resource "google_secret_manager_secret" "datadog_secret" {
   }
 
   # Ensure this resource depends on API services being enabled
-  depends_on = [google_project_service.enable_apis]
+  depends_on = [time_sleep.wait_for_apis]
 }
 
 # Create a secret version with the Datadog API key

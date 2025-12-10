@@ -26,6 +26,7 @@ resource "google_logging_project_sink" "datadog_export_sink" {
   destination            = "pubsub.googleapis.com/projects/${var.project_id}/topics/${var.topic_name}"
   unique_writer_identity = true
   filter                 = var.inclusion_filter
+  depends_on             = [time_sleep.wait_for_apis]
 }
 
 # Create a logging sink at the FOLDER scope | if variable 'log_sink_in_folder' is 'false' or not used this resource will not be created.
@@ -38,6 +39,7 @@ resource "google_logging_folder_sink" "datadog_export_sink" {
   destination      = "pubsub.googleapis.com/projects/${var.project_id}/topics/${var.topic_name}"
   filter           = var.inclusion_filter
   include_children = true
+  depends_on       = [time_sleep.wait_for_apis]
 }
 
 #########################################################################
