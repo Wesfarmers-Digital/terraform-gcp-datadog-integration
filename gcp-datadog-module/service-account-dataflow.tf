@@ -18,6 +18,7 @@ resource "google_service_account" "dataflow_datadog_export_sa" {
   display_name = "Dataflow Service Account"
   description  = "Service account used by the Dataflow service to export logs to Datadog."
   project      = var.project_id
+  depends_on   = [time_sleep.wait_for_apis]
 }
 
 # Define IAM roles needed for the Dataflow Service Account

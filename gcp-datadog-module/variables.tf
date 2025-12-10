@@ -15,6 +15,10 @@
 variable "project_id" {
   type        = string
   description = "The ID of the Google Cloud project."
+  validation {
+    condition     = can(regex("^[a-z][a-z0-9-]{4,28}[a-z0-9]$", var.project_id))
+    error_message = "The project ID must be between 6 and 30 characters, start with a letter, end with a letter or number, and consist only of lowercase letters, numbers, and hyphens."
+  }
 }
 
 variable "subnet_region" {
@@ -32,18 +36,30 @@ variable "dataflow_temp_bucket_name" {
   type        = string
   description = "GCS Bucket to write Dataflow temporary files. Must start and end with letter or number. Must be between 3 and 63 characters."
   default     = "temp-files-dataflow-bucket-"
+  validation {
+    condition     = can(regex("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$", var.dataflow_temp_bucket_name))
+    error_message = "The bucket name must be between 3 and 63 characters, start and end with a letter or number, and contain only lowercase letters, numbers, and hyphens."
+  }
 }
 
 variable "topic_name" {
   type        = string
   description = "Name of the Pub/Sub Topic to receive logs from Google Cloud."
   default     = "datadog-export-topic"
+  validation {
+    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-_.~+%]{2,254}$", var.topic_name))
+    error_message = "The topic name must start with a letter and be between 3 and 255 characters."
+  }
 }
 
 variable "subscription_name" {
   type        = string
   description = "Name of the Pub/Sub subscription to receive logs from Google Cloud."
   default     = "datadog-export-sub"
+  validation {
+    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-_.~+%]{2,254}$", var.subscription_name))
+    error_message = "The subscription name must start with a letter and be between 3 and 255 characters."
+  }
 }
 
 variable "vpc_name" {
@@ -65,6 +81,10 @@ variable "datadog_api_key" {
 variable "datadog_site_url" {
   type        = string
   description = "Datadog Logs API URL, it will depends on the Datadog site region (https://docs.datadoghq.com/integrations/google_cloud_platform/#4-create-and-run-the-dataflow-job)."
+  validation {
+    condition     = can(regex("^https://", var.datadog_site_url))
+    error_message = "The Datadog site URL must start with https://."
+  }
 }
 
 variable "log_sink_in_folder" {
