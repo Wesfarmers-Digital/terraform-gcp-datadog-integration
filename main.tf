@@ -1,3 +1,12 @@
+provider "google" {
+  project = ""
+  region  = ""
+}
+
+provider "google-beta" {
+  project = ""
+  region  = ""
+}
 
 module "datadog-integration" {
   source                    = "./gcp-datadog-module"
@@ -8,7 +17,7 @@ module "datadog-integration" {
   subscription_name         = "datadog-export-sub"
   vpc_name                  = ""
   subnet_name               = ""
-  subnet_region             = ""   # Specify the region of your existing subnet.
+  subnet_region             = ""
   datadog_api_key           = ""
   datadog_site_url          = ""
   log_sink_in_folder        = true
