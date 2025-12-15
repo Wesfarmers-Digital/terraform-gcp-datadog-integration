@@ -55,6 +55,16 @@ Fill the `main.tf` file with your input variables and from the root folder of th
 ### Use a Log sink at the folder level
 
 ```hcl
+provider "google" {
+  project = "my-gcp-project-id"
+  region  = "us-east1"
+}
+
+provider "google-beta" {
+  project = "my-gcp-project-id"
+  region  = "us-east1"
+}
+
 module "datadog-integration" {
   source                    = "./gcp-datadog-module"
   project_id                = "my-gcp-project-id"
@@ -76,6 +86,16 @@ module "datadog-integration" {
 ### Use a Log sink at the project level
 
 ```hcl
+provider "google" {
+  project = "my-gcp-project-id"
+  region  = "us-east1"
+}
+
+provider "google-beta" {
+  project = "my-gcp-project-id"
+  region  = "us-east1"
+}
+
 module "datadog-integration" {
   source                    = "./gcp-datadog-module"
   project_id                = "my-gcp-project-id"
