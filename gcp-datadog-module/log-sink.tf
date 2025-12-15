@@ -58,4 +58,7 @@ resource "google_storage_bucket" "temp_files_bucket" {
   storage_class               = "STANDARD"
   public_access_prevention    = "enforced"
   labels                      = { storage-bucket-label = "datadog_terraform" }
+  soft_delete_policy {
+    retention_duration_seconds = 0
+  }
 }
