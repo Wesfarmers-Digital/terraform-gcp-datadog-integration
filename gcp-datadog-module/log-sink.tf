@@ -51,6 +51,7 @@ resource "random_id" "random" {
 }
 
 resource "google_storage_bucket" "temp_files_bucket" {
+  project  = var.project_id
   name     = lower("${var.dataflow_temp_bucket_name}-${random_id.random.hex}")
   location = var.subnet_region
 

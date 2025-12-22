@@ -41,6 +41,7 @@ resource "google_compute_region_network_firewall_policy" "allow_datadog_policy" 
 
 # Create the Firewall rule for the policy
 resource "google_compute_region_network_firewall_policy_rule" "allow_datadog_rule" {
+  project         = var.project_id
   action          = "allow"
   description     = "Firewall rule to allow traffic from Dataflow workers to Datadog FQDN"
   direction       = "EGRESS"
@@ -127,6 +128,7 @@ resource "google_compute_router" "dataflow_router" {
 }
 
 resource "google_compute_router_nat" "nat" {
+  project                            = var.project_id
   name                               = "dataflow-machines-nat"
   router                             = google_compute_router.dataflow_router.name
   region                             = google_compute_router.dataflow_router.region

@@ -17,6 +17,7 @@
 #####################################################################
 
 resource "google_dataflow_job" "pubsub_stream_to_datadog" {
+  project                 = var.project_id
   name                    = var.dataflow_job_name
   template_gcs_path       = "gs://dataflow-templates-${var.subnet_region}/latest/Cloud_PubSub_to_Datadog"
   temp_gcs_location       = "gs://${google_storage_bucket.temp_files_bucket.id}/tmp_dir"
